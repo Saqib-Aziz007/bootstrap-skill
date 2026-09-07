@@ -46,7 +46,7 @@ Ticketing integration is chosen per project: **Linear** (MCP), **GitHub Issues**
 Clone and symlink into your Claude Code skills directory:
 
 ```bash
-git clone https://github.com/YOUR_USER/bootstrap-skill.git
+git clone https://github.com/Saqib-Aziz007/bootstrap-skill.git
 ln -s "$(pwd)/bootstrap-skill/bootstrap-llm" ~/.claude/skills/bootstrap-llm
 ```
 
