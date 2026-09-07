@@ -1,0 +1,19 @@
+<!-- FULL DEPTH. Fill from interview constraints + stack research. Delete comments. -->
+# Security
+
+- Never commit or log secrets; config via environment ({{ENV_PATTERN}}). `.env` is gitignored; `.env.example` documents every variable.
+- Validate and sanitize input at every boundary ({{BOUNDARY_EXAMPLES}}).
+- Every new endpoint/surface states its auth requirement explicitly, even if "public by design"; authorization is checked server-side, never only in UI.
+- Dependencies: prefer stdlib and existing deps; new deps need a reason in the PR.
+
+## Stack-specific
+
+{{STACK_SECURITY_RULES}}
+<!-- From research: the framework's own security checklist distilled to what applies here
+     (e.g. server action auth guards, SQL parameterization, SSRF in fetch handlers). -->
+
+## Project constraints
+
+{{CONSTRAINT_RULES}}
+<!-- From interview: compliance (PII/PHI handling, GDPR deletion, PCI scope), tenant isolation.
+     Empty section deleted if none. -->

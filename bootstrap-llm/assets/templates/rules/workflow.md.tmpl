@@ -1,0 +1,41 @@
+<!-- Cross-cutting ticket lifecycle. Mirrors /ticket. Fill tracker/stack specifics; delete comments. -->
+# Ticket Workflow
+
+Follow this lifecycle for every ticket. Do not skip discovery; do not start coding immediately.
+
+## 1. Read the ticket
+
+Restate it in one sentence; list what is out of scope. Do not assume extra requirements. Too vague to restate: ask on the ticket, do not guess.
+
+## 2. Discover before building
+
+Search for existing routes, components, services, helpers, and utilities that already do (part of) the job. Read the relevant `llm/` docs and any matching `.claude/refs/` doc first. The codebase outranks your instincts.
+
+**Reuse vs create**: ≥ 80% fit → reuse. 50-80% → extend it (a prop, a parameter, a variant), staying backward compatible. < 50% → create new{{REGISTER_SHARED_NOTE}}.
+<!-- REGISTER_SHARED_NOTE: for projects with a component/util catalog, add " and register it in <catalog>". Else empty. -->
+
+## 3. Plan
+
+For non-trivial work write a short plan first: files to change, what to reuse, assumptions, risks{{PLAN_SKILL_NOTE}}.
+<!-- Full depth: " (use /plan)". Lean: empty. -->
+
+## 4. Implement
+
+Only the ticket scope. Follow [`{{ENGINEERING_RULE_FILE}}`]({{ENGINEERING_RULE_FILE}}). Refactor only what directly supports the ticket; note the rest in the final report as candidate tickets.
+
+## 5. Verify between steps
+
+Do not accumulate broken state; run the fast checks after meaningful changes. Before finishing: `/verify` (all gates){{REVIEW_STEP_NOTE}}.
+<!-- Full depth: ", then /review before committing". Lean: empty. -->
+
+## 6. Update docs that drifted
+
+If the change created a new pattern, module surface, or user-visible flow, update the matching doc in the same change. Arbiter: [`llm-docs.md`](llm-docs.md).
+
+## 7. Finish
+
+Commit, push, open the PR via `/create-pr`, and report: what changed, verification evidence, assumptions, anything incomplete.
+
+## When it's not working
+
+After ~3 failed attempts at one approach: stop, write down why it fails, re-plan. Use subagents for research to keep the main context clean. If truly blocked, report the blocker honestly; never claim done.

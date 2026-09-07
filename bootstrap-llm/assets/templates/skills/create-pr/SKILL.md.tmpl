@@ -1,0 +1,33 @@
+<!-- Fill remote/branch/tracker specifics. Delete comments. -->
+---
+name: create-pr
+description: Create an intent-driven pull request for {{PROJECT_NAME}}: extracts the problem statement, validates the diff against it, links the ticket, targets {{DEFAULT_BRANCH}}. Use for any PR creation; a hook redirects raw `gh pr create` here.
+user_invocable: true
+---
+
+Create a PR whose description explains the problem being solved, not the files changed. Base: **{{DEFAULT_BRANCH}}**; remote: `{{OWNER_REPO}}`.
+
+## 1. Branch state
+
+Confirm you are on a feature branch; extract the ticket ref from its name (`<type>/{{TICKET_REF_PATTERN}}-<slug>`). Uncommitted changes: commit them first per `rules/git-workflow.md`, or ask if they look unrelated.
+
+## 2. Intent
+
+State the problem this PR solves in one sentence. "Add feature X" is a title, not a problem; if you cannot produce the problem sentence, re-read the ticket before writing anything else. This sentence drives the whole description.
+
+## 3. Validate the diff
+
+`git diff {{DEFAULT_BRANCH}}...HEAD`: every changed file serves the stated intent. Anything that does not: remove it, or explain it explicitly in the description. See `instructions/description-format.md` and the `examples/` for the quality bar.
+
+## 4. Build the description
+
+Fill `.github/pull_request_template.md`: problem first, then approach (why this way), then concrete verification steps. Ticket link: `{{PR_TICKET_LINK_FORMAT}}`.
+<!-- e.g. "Closes #<n>" for GitHub; for Linear/Jira keep the ID in the title + a Refs line in the body. -->
+
+## 5. Create
+
+```bash
+BYPASS_CREATE_PR_HOOK=1 gh pr create --base {{DEFAULT_BRANCH}} --title "<title>" --body "<body>"
+```
+
+Title states the change in ≤ ~70 chars{{TITLE_TICKET_NOTE}}<!-- Linear/Jira: " and keeps the ticket ID for auto-linking" -->. Print the PR URL.

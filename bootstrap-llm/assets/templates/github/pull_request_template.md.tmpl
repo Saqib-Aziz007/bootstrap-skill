@@ -1,0 +1,24 @@
+<!-- Fill the ticket-link slot and project-specific checklist items from non-negotiables. -->
+## Problem
+
+<!-- One sentence: what was broken, missing, or wrong. Can't state it in one? The PR is too big. -->
+
+{{TICKET_LINK_SLOT}}
+<!-- GitHub: "Closes #". Linear/Jira: "Refs {{KEY}}-" (and keep the ID in the PR title). -->
+
+## Solution
+
+<!-- 2-3 sentences: the approach and why this way. Not a file list. -->
+
+## How to verify
+
+<!-- Steps a reviewer can follow mechanically: commands, screens, expected results. -->
+
+## Checklist
+
+- [ ] Scoped to one ticket; no unrelated changes
+- [ ] `/verify` passes
+- [ ] Docs updated where this change made them stale (llm/, refs/, rules)
+{{PROJECT_CHECKLIST_ITEMS}}
+<!-- 1-4 items from this project's non-negotiables, mechanically checkable.
+     e.g. "- [ ] No raw color values; tokens only" / "- [ ] New env vars documented in .env.example" -->

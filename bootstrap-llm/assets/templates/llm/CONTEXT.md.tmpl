@@ -1,0 +1,23 @@
+<!-- FULL DEPTH (lean merges into PRODUCT.md). From interview. Delete comments. -->
+# Domain Context
+
+## User types
+
+{{USER_TYPES}}
+<!-- One block per role: who they are, what they care about, what frustrates them.
+     Tickets say "the user"; this doc says which one and what they'd consider broken. -->
+
+## Glossary
+
+Terms a newcomer (human or AI) would misread. Misreading these causes wrong implementations that pass review.
+
+| Term | Means here | Not to be confused with |
+|---|---|---|
+{{GLOSSARY_ROWS}}
+
+## Hard constraints
+
+{{CONSTRAINTS}}
+<!-- From interview: compliance, required integrations, platform requirements, offline,
+     multi-tenancy. For each: the constraint + what it forbids/forces in practice.
+     These silently invalidate otherwise-good implementations; check tickets against them. -->

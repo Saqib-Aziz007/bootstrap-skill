@@ -1,0 +1,12 @@
+<!-- FULL DEPTH. Trigger table starts nearly empty at bootstrap and grows with the codebase. -->
+# Module References: when to read what
+
+`.claude/refs/` holds module-scoped reference docs, loaded on demand so the always-on context stays lean. Before touching a module listed here, read its doc first; it carries invariants and gotchas the code alone will not tell you.
+
+| Touching | Read first |
+|---|---|
+{{REFS_TRIGGER_ROWS}}
+<!-- At bootstrap usually just: "| (none yet; add rows as refs are written) | |"
+     If the repo already has complex modules, seed 1-3 rows with refs you generate now. -->
+
+New module surface → new ref doc from [`../refs/_TEMPLATE.md`](../refs/_TEMPLATE.md) + a row here, same change (see [`llm-docs.md`](llm-docs.md)).

@@ -1,0 +1,26 @@
+<!-- Mostly fixed; fill the budget number and layer paths; delete comments. -->
+# Keeping These Docs Current
+
+The harness docs are this repo's shared brain; stale guidance is worse than none. Update them **as part of the change that makes them true**, never "later".
+
+- New recurring code pattern → [`../../llm/PATTERNS.md`](../../llm/PATTERNS.md), same change.
+- New or changed module surface → a doc in [`../refs/`](../refs/) following [`_TEMPLATE.md`](../refs/_TEMPLATE.md){{REFS_TRIGGER_NOTE}}.
+<!-- Full depth: " plus a trigger row in refs.md". Lean: empty. -->
+- New or changed user-visible flow → status/steps in [`../../llm/USER_FLOWS.md`](../../llm/USER_FLOWS.md).
+- Architectural change (layer, storage, service) → [`../../llm/ARCHITECTURE.md`](../../llm/ARCHITECTURE.md).
+- New skill or hook → wire it and add a row to CLAUDE.md's documentation map.
+
+If a doc and the code disagree, fix whichever is wrong; never leave them disagreeing.
+
+## Context budget
+
+`CLAUDE.md` + `.claude/rules/` load into **every** session. Hard cap: {{BUDGET_KB}} KB combined (enforced by `hooks/check-rules-size.sh`). The discipline:
+
+- `rules/` holds only cross-cutting rules that apply to every ticket.
+- Module-scoped guidance lives in `.claude/refs/`, loaded on demand.
+- Domain and product knowledge lives in `llm/`, loaded on demand.
+- Docs state the CURRENT truth only; history and "supersedes" notes belong in commit messages. Git is the archive.
+
+## Style
+
+Write for a smart engineer with zero project history. Concrete over generic; link instead of duplicating; no em dash characters (use periods, commas, colons, parentheses).

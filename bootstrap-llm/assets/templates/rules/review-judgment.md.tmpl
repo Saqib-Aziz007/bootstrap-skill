@@ -1,0 +1,11 @@
+<!-- FULL DEPTH. Nearly fixed; fill tracker verb. Delete comments. -->
+# Review Judgment
+
+Automated reviewers (CodeRabbit, linters, security scanners) and human comments produce feedback of very different value. Triage every item into exactly one bucket; never blind-apply and never blind-dismiss.
+
+1. **Fix now**: correct, in scope of the current diff, cheap. Fix it in a follow-up commit on the same branch.
+2. **Ticket it**: correct but out of scope (pre-existing issue, adjacent improvement). {{FILE_TICKET_VERB}} and link it in a reply.
+<!-- FILE_TICKET_VERB: "Create a Linear issue in {{KEY}}" / "Open a GitHub issue" / "Create a Jira ticket in {{KEY}}" -->
+3. **Dismiss with reason**: wrong, or a nit that contradicts project rules. Reply with the one-line reason; silence looks like negligence and re-triggers the same feedback next PR.
+
+The test for "fix now" vs "ticket it" is the ticket boundary, not effort. A one-line fix to unrelated code still gets a ticket: scope discipline is what keeps PRs reviewable and history traceable.

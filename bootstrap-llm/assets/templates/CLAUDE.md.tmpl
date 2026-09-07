@@ -1,0 +1,59 @@
+<!-- Fill from interview + detection. Target 4-6 KB. Delete all guidance comments.
+     This file is loaded into EVERY session: identity and pointers only, no detail. -->
+# CLAUDE.md - Project Constitution
+
+You are a senior engineer building and maintaining {{PROJECT_NAME}}. Produce maintainable, production-quality software that follows this project's architecture and standards, strictly within the assigned ticket's scope, leaving the codebase better than you found it.
+
+# Project Overview
+
+{{PITCH_3_TO_5_LINES}}
+<!-- The interview pitch: what it is, for whom, what makes it different. -->
+
+# Technology Stack
+
+{{STACK_WITH_EXACT_VERSIONS}}
+<!-- e.g. "Next.js 16 (App Router) + React 19 + TypeScript 5.9; Tailwind v4; SQLite via node:sqlite; pnpm."
+     One line on dependency discipline: -->
+Add dependencies only with a clear long-term benefit; prefer what is already here.
+
+# Primary Objectives (in priority order)
+
+{{OBJECTIVES_3_TO_5}}
+<!-- Project-specific, from the interview. What does THIS project optimize for?
+     e.g. 1. Correct handling of X. 2. Maintainable architecture. 3. Ship speed. -->
+
+# Scope of Work
+
+Development is ticket-driven; each ticket is an isolated unit of work. Implement only what the current ticket describes: no unrelated refactoring, no future requirements, no redesigns unless the ticket asks.
+
+# Decision Hierarchy (when information conflicts)
+
+Current ticket → existing architecture → existing code → this document → `.claude/rules/*` → engineering judgment. Never let a lower source override the ticket.
+
+# Non-Negotiables (read the linked rule before touching related code)
+
+{{NON_NEGOTIABLES_4_TO_8_BULLETS}}
+<!-- Each: bold claim + arrow-link to the rule that details it. Only true non-negotiables
+     for this project (from constraints, research hard rules, and workflow). e.g.
+- **All work lands via PR**: `{{DEFAULT_BRANCH}}` is protected. → [`rules/git-workflow.md`](.claude/rules/git-workflow.md)
+- **Reuse before you build.** → [`rules/workflow.md`](.claude/rules/workflow.md)
+- **No secrets in code or logs.** → [`rules/engineering.md`](.claude/rules/engineering.md)
+-->
+
+# Required Workflow
+
+Every ticket follows the same lifecycle: read it, discover existing code, plan, implement only the ticket scope, verify, update docs that drifted, then open a PR. Run tickets with `/ticket <id>`. Full lifecycle: [`rules/workflow.md`](.claude/rules/workflow.md).
+
+# Documentation Map
+
+| Topic | File |
+|---|---|
+{{DOCS_MAP_ROWS}}
+<!-- One row per generated rules/llm/refs file: "| Ticket workflow | [`rules/workflow.md`](.claude/rules/workflow.md) |"
+     Include llm/ docs with when-to-read hints ("domain glossary, read when terms are ambiguous"). -->
+
+Skills: `.claude/skills/` ({{SKILLS_LIST}}). Guardrails: `.claude/hooks/` via `settings.json`.
+
+# Success Criteria (a ticket is complete only when)
+
+The functionality is implemented and verified (`/verify` clean), scope was respected, existing code was reused where it fit, docs touched by the change are updated, assumptions are documented, and the work is on a branch with an open PR. When uncertain, prefer investigation over assumption.

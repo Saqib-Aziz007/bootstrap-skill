@@ -1,0 +1,20 @@
+<!-- FULL DEPTH. Fill from research + detected test setup. Delete comments. -->
+# Testing
+
+## What we test and with what
+
+{{TEST_STACK_DESCRIPTION}}
+<!-- The detected/researched setup: runner(s), unit vs integration vs e2e split, where tests live,
+     the exact commands (must match /verify). -->
+
+## When a ticket requires tests
+
+- New logic (branching, calculation, parsing): a test beside it, same change.
+- Bug fix: a regression test that reproduces the bug **before** the fix.
+- Pure wiring/markup with no logic: tests optional; say so in the PR.
+
+## Rules
+
+{{TESTING_RULES}}
+<!-- 3-6 concrete rules from research: test naming/structure (AAA), what to mock vs not,
+     determinism (no real clocks/network), fixture/data conventions for this stack. -->

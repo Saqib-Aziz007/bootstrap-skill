@@ -1,0 +1,40 @@
+<!-- From research + detection + interview constraints. For a fresh repo this is the INTENDED
+     architecture; mark intent vs current reality honestly. Delete comments. -->
+# Architecture
+
+## System shape
+
+{{SYSTEM_SHAPE}}
+<!-- Layers and data flow in prose or a small ASCII diagram: UI → server → storage;
+     background jobs; external services. Where the boundaries are and which direction
+     dependencies point. -->
+
+## Where things live
+
+| Path | Owns |
+|---|---|
+{{TREE_ROWS}}
+<!-- The load-bearing directories only (5-12 rows), from detection or the researched
+     recommended structure for a fresh repo. -->
+
+## Storage
+
+{{STORAGE}}
+<!-- DB/engine, how schema changes happen (migrations tool + command), access layer
+     (ORM/queries file), what must never bypass it. -->
+
+## External services
+
+{{EXTERNAL_SERVICES}}
+<!-- Each integration: what it does, where the client lives, how it is configured (env var
+     names), how it behaves in dev (mock? sandbox?). "None yet" is a fine answer. -->
+
+## Layer rules
+
+{{LAYER_RULES}}
+<!-- 2-5 bullets stating what must not cross where: "UI never touches the DB client
+     directly; all access via src/lib/queries.ts". These are the architecture's teeth. -->
+
+---
+Researched: {{RESEARCH_DATE}} | Stack: {{STACK_VERSIONS}} | Sources: {{SOURCES}}
+Stale if: major version bump, or older than ~3 months. Refresh: /bootstrap-llm --refresh

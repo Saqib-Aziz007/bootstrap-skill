@@ -1,0 +1,38 @@
+<!-- LEAN DEPTH ONLY: merged coding-style + testing + security + error handling.
+     Fill entirely from Phase 2 research + detection. Every rule must be concrete enough
+     that a violation is mechanically recognizable. Target ≤ 4 KB. Delete comments. -->
+# Engineering Rules
+
+Hard rules for all code in this repo. Concrete beats aspirational: if you cannot tell whether code violates a rule, the rule does not belong here.
+
+## Style ({{STACK_SHORT}})
+
+{{STYLE_RULES}}
+<!-- 5-10 researched, version-specific hard rules. Pattern each as: rule + the mechanical tell.
+     e.g. "- Server components by default; 'use client' only where interactivity requires it."
+          "- No console.*; use the logger in src/lib/log.ts (lint enforces)."
+          "- Explicit return types on exported functions." -->
+
+## Errors
+
+{{ERROR_RULES}}
+<!-- 2-4 rules: how errors are raised, wrapped, logged in this stack; what context they carry. -->
+
+## Testing
+
+{{TESTING_RULES}}
+<!-- What is tested and with what (from research + detected setup); when a ticket requires tests;
+     the command that runs them (must match /verify). e.g. "New logic gets a <runner> test beside it;
+     bug fixes get a regression test reproducing the bug first." -->
+
+## Security
+
+- Never commit or log secrets; config via environment ({{ENV_PATTERN}}).<!-- e.g. ".env, documented in .env.example" -->
+- Validate input at every boundary ({{BOUNDARY_EXAMPLES}}).<!-- e.g. "API routes, server actions, CLI args" -->
+- Every new endpoint/surface states its auth requirement explicitly, even if "public by design".
+{{EXTRA_SECURITY_RULES}}
+<!-- From interview constraints (PII handling, compliance) and stack research. Empty if none. -->
+
+---
+Researched: {{RESEARCH_DATE}} | Stack: {{STACK_VERSIONS}} | Sources: {{SOURCES}}
+Stale if: major version bump, or older than ~3 months. Refresh: /bootstrap-llm --refresh

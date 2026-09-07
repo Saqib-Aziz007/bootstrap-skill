@@ -1,0 +1,74 @@
+<!-- The harness centerpiece. Fill every {{...}} with REAL values (tracker commands from
+     references/ticketing/<system>.md, real key/repo/states). ≤ ~150 lines. Delete comments. -->
+---
+name: ticket
+description: Implement a {{TRACKER_NAME}} ticket end to end for {{PROJECT_NAME}}: fetch {{KEY_EXAMPLE}}, branch, implement, verify, update docs, open a PR, advance the ticket. Use whenever the user gives a ticket ID or URL, says "do ticket X", "pick up X", or pastes a ticket reference, even without further instructions.
+user_invocable: true
+---
+
+# /ticket - implement a ticket end to end
+
+Input: a ticket reference ({{KEY_EXAMPLE}} or URL). Optional: `--worktree` (parallel work), `--no-pr` (stop before PR).
+
+Output: verified change on a branch with an open PR, ticket advanced to {{REVIEW_STATE}}, honest report.
+
+The ticket is the only input you need; everything else is in `CLAUDE.md`, `.claude/rules/`, and `llm/`. If auth below fails, print the fix and stop rather than half-running.
+
+## 1. Fetch
+
+{{FETCH_COMMANDS}}
+<!-- Concrete commands/tool calls from references/ticketing/<system>.md, real key/repo.
+     Include the auth-missing fallback block with connect instructions. -->
+
+## 2. Scope
+
+Restate the ticket in one sentence; list what is out of scope. Cannot restate it: ask on the ticket ({{COMMENT_COMMAND_SHORT}}), report, stop. Guessing scope wastes the whole run.
+
+## 3. Claim
+
+{{CLAIM_COMMANDS}}
+<!-- Status → {{STARTED_STATE}}, self-assign. Prevents parallel sessions double-taking. -->
+
+## 4. Branch
+
+Off freshly-pulled `{{DEFAULT_BRANCH}}`: `<type>/{{TICKET_REF_PATTERN}}-<slug>` (types per `rules/git-workflow.md`). With `--worktree`, or when other tickets are in flight:
+
+```bash
+git worktree add ../{{REPO_NAME}}-<ticket-ref> -b <branch> {{DEFAULT_BRANCH}}
+```
+
+and work inside it. One worktree per ticket is what makes parallel sessions safe.
+
+## 5. Discover, plan, implement
+
+Follow `rules/workflow.md` steps 2-4: read the docs map's relevant `llm/` and `refs/` entries, reuse before building, write a short plan for non-trivial work{{PLAN_SKILL_NOTE}}, implement only the ticket scope.
+
+## 6. Verify
+
+`/verify` until clean; fix honestly (no skipped tests, no loosened assertions to pass). Stuck after ~3 attempts on one approach: stop, write why, re-plan{{REVIEW_STEP_NOTE}}.
+
+## 7. Update docs that drifted
+
+New pattern, module surface, or flow change → update `llm/PATTERNS.md` / `refs/` / `llm/USER_FLOWS.md` in this same change (arbiter: `rules/llm-docs.md`). This is why the next session can trust the docs.
+
+## 8. Land
+
+Commit per `rules/git-workflow.md` (trailer: `{{COMMIT_TRAILER_EXAMPLE}}`), push, then `/create-pr` (raw `gh pr create` is hook-blocked). Then advance the ticket:
+
+{{REVIEW_TRANSITION_COMMANDS}}
+<!-- Status → {{REVIEW_STATE}}, attach PR link per the ticketing reference. -->
+
+## 9. Report
+
+```
+## {{KEY_EXAMPLE_SHORT}}: <one-line restatement>
+**Changed**: <files/areas, 2-4 lines>
+**Verified**: <gate results, actual output not "should work">
+**PR**: <url>
+**Assumptions**: <or "none">
+**Out of scope, worth a ticket**: <or "none">
+```
+
+## If blocked
+
+Say exactly where and what would unblock; move the ticket back or comment; never claim done. A truthful stuck report keeps this skill trustworthy enough to run unattended.

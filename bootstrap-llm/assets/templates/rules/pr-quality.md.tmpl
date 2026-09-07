@@ -1,0 +1,12 @@
+<!-- FULL DEPTH. Nearly fixed; fill the reviewer context line. Delete comments. -->
+# PR Quality Bar
+
+A PR is an argument to a reviewer{{REVIEWER_CONTEXT}}, not a diff dump.
+<!-- REVIEWER_CONTEXT: " (CodeRabbit + a human)" / " (future-you; solo repo)" etc. from interview. -->
+
+- **Every PR answers "what problem does this solve?"** in its first sentence. "Add feature X" is a title, not a problem.
+- **One ticket per PR.** Unrelated improvements you found become new tickets, not stowaways.
+- **Small enough to review in one sitting.** If the ticket forces a big diff, structure the description to guide the reading order.
+- **Description = problem, approach, verification.** Approach says why this way; verification says what you ran and what a reviewer can click/run to confirm.
+- **The diff matches the description.** Before opening, re-read the diff and remove or explain anything a reviewer would ask "why is this here?" about.
+- Use `/create-pr`; it enforces all of the above.

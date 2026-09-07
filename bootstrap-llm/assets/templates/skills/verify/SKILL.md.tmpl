@@ -1,0 +1,33 @@
+<!-- The single definition of "green". Fill with detected commands; drop gates the stack
+     lacks; keep order fast-to-slow. Delete comments. -->
+---
+name: verify
+description: Run all quality gates for {{PROJECT_NAME}} (types, lint, tests, build) in order, stopping at the first failure, and report pass/fail with the first errors. Use before committing, before PRs, and whenever asked "is it green?".
+user_invocable: true
+---
+
+Run the gates in order; stop at the first failure and report it with the actual error output. Package manager: **{{PKG_MANAGER}}**.
+
+**Gate 1 - Types/static**
+```bash
+{{TYPECHECK_CMD}}
+```
+
+**Gate 2 - Lint**
+```bash
+{{LINT_CMD}}
+```
+
+**Gate 3 - Tests**
+```bash
+{{TEST_CMD}}
+```
+{{TEST_NOTES}}
+<!-- Anything needed for tests to run: seed command, env, server. Omit if none. -->
+
+**Gate 4 - Build** (slower; run when the change could affect it)
+```bash
+{{BUILD_CMD}}
+```
+
+Report the result per gate. A red gate is fixed honestly: never skip tests, loosen assertions, or suppress errors to get to green; if a gate is legitimately wrong, fix the gate in the same change and say so.

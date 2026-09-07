@@ -1,0 +1,25 @@
+<!-- FULL DEPTH. Delete comments. -->
+---
+name: plan
+description: Structured planning for non-trivial {{PROJECT_NAME}} tickets: loads the relevant harness docs, then produces a step plan with files to touch, reuse targets, and risks. Use before implementing anything estimated over ~an hour or touching more than ~3 files.
+user_invocable: true
+---
+
+Plan before code when the ticket is non-trivial. The plan's job is to surface reuse and risk while changing course is still free.
+
+1. **Load context**: the ticket, `llm/ARCHITECTURE.md`, `llm/PATTERNS.md`, the `refs/` docs matching the modules involved, and the relevant flow in `llm/USER_FLOWS.md`.
+2. **Survey**: find what already exists that this ticket can reuse or must not break (per `rules/workflow.md` thresholds).
+3. **Write the plan**:
+
+```
+## Plan: <ticket ref> <one-line goal>
+**Touches**: <files/modules, with reuse targets marked>
+**Steps**: 1. ... 2. ... (each independently verifiable)
+**New patterns/surfaces**: <what will need a PATTERNS/refs update in step "docs">
+**Risks**: <what could invalidate this plan + how you'll detect it early>
+**Out of scope**: <adjacent work this plan deliberately skips>
+```
+
+4. **Sanity check**: does the plan's first step produce something verifiable? Plans that only "verify at the end" hide failure until it is expensive.
+
+Keep it under a page; a plan longer than the diff it produces is procrastination.

@@ -1,0 +1,16 @@
+<!-- FULL DEPTH. Fill scope-source specifics. Delete comments. -->
+---
+name: review
+description: Pre-commit semantic self-review for {{PROJECT_NAME}}: runs /verify, then reads the diff against the ticket for scope creep, missed edge cases, and rule violations. Use before committing non-trivial work.
+user_invocable: true
+---
+
+Run `/verify` first; a semantic review of broken code is wasted work. Then review `git diff` (staged + unstaged) with fresh eyes, as the reviewer who will read the PR:
+
+1. **Scope**: does every hunk serve the current ticket? Stowaways get reverted or explicitly justified.
+2. **Rules**: check the diff against `CLAUDE.md` non-negotiables and `.claude/rules/`; cite the specific rule for each violation found.
+3. **Edge cases**: for each changed behavior, name the empty/missing/duplicate/unauthorized case and where it is handled. "Not handled, out of ticket scope" is acceptable when stated.
+4. **Skepticism pass**: what would a hostile reviewer flag? Half-done error handling, misleading names, tests that assert too little, docs that now lie.
+5. **Docs**: did this change make any `llm/`, `refs/`, or rules doc stale? Fix in this change (per `rules/llm-docs.md`).
+
+Output: a short list of findings with file:line, each tagged fix-now / ticket-later / accepted-risk, then apply the fix-nows. No findings: say so and proceed to commit.

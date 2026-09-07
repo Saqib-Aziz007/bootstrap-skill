@@ -1,0 +1,95 @@
+{
+  "skill_name": "bootstrap-llm",
+  "evals": [
+    {
+      "id": 0,
+      "name": "nextjs-github-lean",
+      "prompt": "/bootstrap-llm I just scaffolded this Next.js app and want it set up for AI-driven development. Here's everything you need so you don't have to ask: TasteBud is a weekly meal-prep planner for busy parents. The parent picks recipes for the week, the app generates a grocery list grouped by supermarket aisle and a prep-day schedule. A partner can view the plan and check off groceries on their phone (read-only otherwise). Main stories: (1) build the weekly plan from a recipe library, (2) auto-generate the grouped grocery list, (3) prep-day schedule with step timers, (4) share plan read-only via link. Domain terms: a 'Plan' is one week for one household; a 'Prep block' is a batch-cooking session, usually Sunday. Constraint: must work well on phones, no native app. I'm solo, ticketing via GitHub issues in this repo, defaults are fine for branches and commits, no CodeRabbit, keep the harness lean.",
+      "expected_output": "Complete lean harness in the fixture repo: CLAUDE.md constitution, AGENTS.md symlink, llm/ docs carrying the TasteBud domain and 4 stories, lean rules set, ticket/verify/create-pr skills wired to GitHub issues with gh commands and labels, executable hooks + valid settings.json, PR template, and a final report.",
+      "files": [
+        "bootstrap-llm-workspace/fixtures/fixture-nextjs"
+      ],
+      "assertions": [
+        "Core harness: CLAUDE.md + rules directory",
+        "Domain docs generated (product/flows/architecture/patterns)",
+        "AGENTS.md is a symlink to CLAUDE.md",
+        "settings.json valid; hooks exist and are executable",
+        "Workflow skills present (ticket, verify, create-pr)",
+        "Ticket skill wired to GitHub Issues",
+        "PR template with problem/verification/checklist",
+        "No unfilled placeholders",
+        "No template guidance comments shipped",
+        "All relative links resolve",
+        "Always-loaded context within 45KB budget",
+        "No em dash characters",
+        "Final report written for the user",
+        "Domain captured: TasteBud product",
+        "Domain captured: Plan/Prep block glossary",
+        "Domain captured: grocery list flow",
+        "Domain captured: share read-only flow",
+        "Domain captured: mobile constraint"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "fastapi-linear-full",
+      "prompt": "/bootstrap-llm Set this repo up for ticket-driven AI development. Context so you don't need to interview me: LedgerLite is an invoicing API for freelancers; they create clients and invoices, send them, and track payment status. Paying user is the freelancer; their client only receives emails and a hosted invoice page. Stories: (1) CRUD clients, (2) create+send an invoice (PDF by email), (3) track status draft/sent/paid/overdue, (4) overdue reminders on a schedule, (5) export a date range to CSV for accountants. Glossary: an 'Invoice number' is per-freelancer sequential and legally must not have gaps; 'Sending' always means email with the PDF attached. Constraint: GDPR, freelancers are EU-based, deleting an account must purge client PII but keep invoice records legally required for 10 years. Ticketing is Linear, project key LED, statuses In Progress and In Review. Solo but this one will grow, so give me the full harness. Branch/commit defaults are fine.",
+      "expected_output": "Complete full-depth harness: constitution + symlink, all five llm/ docs (GDPR + invoice-number constraints captured), full rules set (separate coding-style/testing/security, pr-quality, review-judgment, refs trigger table), all five skills with /ticket wired to Linear MCP (LED keys, real state names, connect instructions for missing auth), hooks + settings.json, PR template, report.",
+      "files": [
+        "bootstrap-llm-workspace/fixtures/fixture-fastapi"
+      ],
+      "assertions": [
+        "Core harness: CLAUDE.md + rules directory",
+        "Domain docs generated (product/flows/architecture/patterns)",
+        "AGENTS.md is a symlink to CLAUDE.md",
+        "settings.json valid; hooks exist and are executable",
+        "Workflow skills present (ticket, verify, create-pr)",
+        "Ticket skill wired to Linear",
+        "PR template with problem/verification/checklist",
+        "No unfilled placeholders",
+        "No template guidance comments shipped",
+        "All relative links resolve",
+        "Always-loaded context within 45KB budget",
+        "No em dash characters",
+        "Final report written for the user",
+        "Domain captured: LedgerLite product",
+        "Domain captured: invoice-number gap rule",
+        "Domain captured: GDPR retention constraint",
+        "Domain captured: CSV export flow",
+        "Domain captured: overdue reminders flow"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "existing-repo-jira-merge",
+      "prompt": "/bootstrap-llm This express service already has a CLAUDE.md and AGENTS.md with notes from me. Set up the full AI harness around them WITHOUT losing anything I wrote. Extra context: Shipmate relays GitHub and Stripe webhooks to our internal queues; users are internal platform engineers only. Stories: (1) receive+verify webhook signatures, (2) forward to the right queue with retries, (3) replay failed deliveries from a dead-letter list. Ticketing: Jira at https://acme-io.atlassian.net, project key OPS, our statuses are 'In Dev' and 'Code Review'. Keep it lean, we're two people. Branch/commit defaults fine, no CodeRabbit.",
+      "expected_output": "Lean harness merged around existing docs: my CLAUDE.md notes (Salman deploy note, /hooks/github warning, frozen legacy/) survive in the constitution; AGENTS.md content merged in and the file replaced by a symlink; /ticket wired to Jira (OPS keys, In Dev/Code Review by name, REST fallback with env-var auth, .env.example); lean rules + skills + hooks; report says what was merged.",
+      "files": [
+        "bootstrap-llm-workspace/fixtures/fixture-existing"
+      ],
+      "assertions": [
+        "Core harness: CLAUDE.md + rules directory",
+        "Domain docs generated (product/flows/architecture/patterns)",
+        "AGENTS.md is a symlink to CLAUDE.md",
+        "settings.json valid; hooks exist and are executable",
+        "Workflow skills present (ticket, verify, create-pr)",
+        "Ticket skill wired to Jira",
+        "PR template with problem/verification/checklist",
+        "No unfilled placeholders",
+        "No template guidance comments shipped",
+        "All relative links resolve",
+        "Always-loaded context within 45KB budget",
+        "No em dash characters",
+        "Final report written for the user",
+        "Domain captured: Shipmate product",
+        "Domain captured: dead-letter replay flow",
+        "Domain captured: signature verification flow",
+        "Preserved user note: /hooks/github must not be renamed",
+        "Preserved user note: manual deploy from Salman's machine",
+        "Preserved user note: legacy/ is frozen",
+        "Preserved user note: npm ci before tests",
+        "Preserved user note: retry.js needs a ticket"
+      ]
+    }
+  ]
+}

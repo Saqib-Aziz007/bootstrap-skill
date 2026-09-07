@@ -1,0 +1,47 @@
+<!-- Fill branch/remote/tracker specifics; delete comments. -->
+# Git Workflow
+
+`{{DEFAULT_BRANCH}}` is protected. All work happens on a branch and lands through a PR. Remote: `{{OWNER_REPO}}`. Use `gh` for PR operations.
+
+## Branching
+
+Branch off freshly-pulled `{{DEFAULT_BRANCH}}`:
+
+```txt
+<type>/{{TICKET_REF_PATTERN}}-<short-kebab-slug>
+```
+
+- **type**: `feature`, `fix`, `chore`, `docs`, `refactor`
+- **{{TICKET_REF_PATTERN}}**: the ticket reference<!-- e.g. "ABC-123" for Linear/Jira, "issue-12" for GitHub -->; omit when no ticket exists (`chore/update-readme`)
+
+## Parallel tickets: worktrees
+
+Running more than one ticket at a time? One worktree per ticket, one session per worktree; sessions never collide on a working tree:
+
+```bash
+git worktree add ../{{REPO_NAME}}-<ticket-ref> -b <branch> {{DEFAULT_BRANCH}}
+# work there; after the PR merges:
+git worktree remove ../{{REPO_NAME}}-<ticket-ref>
+```
+
+## Commits
+
+- Imperative subject, capitalized, no trailing period, ≤ 72 chars: "Add invoice export", not "added".
+- Body explains **why**, not a restatement of the diff.
+- Ticket trailer: `{{COMMIT_TRAILER_EXAMPLE}}`<!-- e.g. "Refs ABC-123", or "Closes #12" when it completes the ticket -->.
+- One logical change per commit.
+
+## Before staging
+
+`git diff --stat` first: if the diff is much larger than your change (format-on-save churn), revert the incidental noise and re-apply only the real change.
+
+## Pushing & PRs
+
+- Never push to `{{DEFAULT_BRANCH}}`; force-push only your own branch with `--force-with-lease`.
+- Sync with `{{DEFAULT_BRANCH}}` before opening/updating a PR.
+- Open PRs with `/create-pr` (a hook redirects raw `gh pr create`); description per the PR template.
+
+## Never commit
+
+{{NEVER_COMMIT_LIST}}
+<!-- Stack-specific: build output, env files, generated artifacts, local DBs. From detection. -->
